@@ -15,9 +15,6 @@ const getAllConversation = async (offset, limit) => {
                 model: Users,
                 as: 'user',
                 attributes: ['id', 'firstName', 'lastName', 'email']
-            },
-            {
-                model: Messages
             }
         ]
     })

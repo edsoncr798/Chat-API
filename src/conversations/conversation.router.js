@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {getAllMessageByConversation} = require('../message/message.services')
+const {getAllMessageByConversation, postMessage} = require('../message/message.services')
 const passport = require('passport')
 
 const conversationServices = require('./conversation.services')
@@ -29,8 +29,12 @@ router.route('/:id')
         )
 
 router.route('/:id/message')
-            .get(getAllMessageByConversation)
-            .post()
+            .get(
+                passport.authenticate('jwt', {session: false}),
+                getAllMessageByConversation)
+            .post(
+                passport.authenticate('jwt', {session: false}),
+                postMessage)
 
 
 module.exports = router
